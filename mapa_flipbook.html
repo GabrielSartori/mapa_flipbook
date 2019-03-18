@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapa flipbook</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Gabriel Sartori" />
+    <link rel="stylesheet" href="css/shinobi.css" type="text/css" />
+    <link rel="stylesheet" href="css/ninpo.css" type="text/css" />
+    <link rel="stylesheet" href="css/ninjutsu.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+background-image: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-110494.jpg)
+background-size: cover
+
+&lt;h2 style="font-size: 97px; position: relative;top: 225px; color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;text-align: center;"&gt; Visualização GeoEspacial com R &lt;/h2&gt;
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt; 
+
+&lt;h2 style="font-size: 47px; position: relative;top: 300px; color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;text-align: center;"&gt; Gabriel Sartori &lt;/h2&gt;
+
+---
+# Diferentes Mapas
+
+
+
+
+
+
+
+
+
+
+
+```
+  Warning: Column `bairro` joining character vector and factor, coercing into
+  character vector
+```
+
+
+&lt;img src="./img/diferentes_mapas.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+# Bibliotecas R 
+
+&lt;br&gt;&lt;br&gt;
+&lt;div class="img_center"&gt;
+&lt;img src = "https://ggplot2.tidyverse.org/logo.png" alt = "gif2" /&gt;
+&lt;img src = "https://user-images.githubusercontent.com/520851/34887433-ce1d130e-f7c6-11e7-83fc-d60ad4fae6bd.gif" style = "width: 270px;" alt = "gif" /&gt;
+&lt;/div&gt;
+
+
+---
+background-image: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-711720.jpg)
+background-size: cover
+
+
+
+---
+## Dados Imobiliários 
+
++ Valor de Locação
+
+
+```
+  # A tibble: 75 x 5
+     regional     bairro              quarto apartamento  casa
+     &lt;chr&gt;        &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+   1 " PORTÃO"    ÁGUA VERDE               2        1100  675 
+   2 " MATRIZ"    JARDIM SOCIAL           NA          NA   NA 
+   3 " BOQUEIRÃO" XAXIM                    2         950  750 
+   4 " CAJURU"    JARDIM DAS AMÉRICAS      2         950 1500 
+   5 " PORTÃO"    GUAÍRA                   2        1100  550 
+   6 " BOA VISTA" BAIRRO ALTO              2         750  700 
+   7 " MATRIZ"    SÃO FRANCISCO            2        1280 1238.
+   8 " MATRIZ"    ALTO DA GLÓRIA          NA          NA   NA 
+   9 " BOA VISTA" ATUBA                    2         750  900 
+  10 " MATRIZ"    CABRAL                  NA          NA   NA 
+  # … with 65 more rows
+```
+
+
+
+
+---
+
+
+
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+*ggplot(data = moradia_quarto2)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_1-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+* aes(x = apartamento)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_2-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+* aes(y = casa)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_3-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+* geom_point(colour = "purple")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_4-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+* labs(x = "Apartamento")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_5-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+* labs(y = "Casa")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_6-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+* labs(title = "Relação Valor Locação Casa e Apartamento")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_7-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+* geom_vline(xintercept = media_ap, linetype = "dashed")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_8-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+* geom_hline(yintercept = media_casa, linetype = "dashed")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_9-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+  geom_hline(yintercept = media_casa, linetype = "dashed") +
+* gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_10-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+  geom_hline(yintercept = media_casa, linetype = "dashed") +
+  gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+* geom_text_repel(aes(label = tolower(bairro)), colour = "darkred")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_11-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+  geom_hline(yintercept = media_casa, linetype = "dashed") +
+  gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
+* theme_bw()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_12-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+  geom_hline(yintercept = media_casa, linetype = "dashed") +
+  gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
+  theme_bw() +
+* theme(plot.title = element_text(hjust = 0.5))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_13-1.png" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+
+
+
+
+---
+## Dados Imobiliários com Polígono
+
+
+```
+  # A tibble: 75 x 5
+     regional     bairro              quarto apartamento  casa
+     &lt;chr&gt;        &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+   1 " PORTÃO"    ÁGUA VERDE               2        1100  675 
+   2 " MATRIZ"    JARDIM SOCIAL           NA          NA   NA 
+   3 " BOQUEIRÃO" XAXIM                    2         950  750 
+   4 " CAJURU"    JARDIM DAS AMÉRICAS      2         950 1500 
+   5 " PORTÃO"    GUAÍRA                   2        1100  550 
+   6 " BOA VISTA" BAIRRO ALTO              2         750  700 
+   7 " MATRIZ"    SÃO FRANCISCO            2        1280 1238.
+   8 " MATRIZ"    ALTO DA GLÓRIA          NA          NA   NA 
+   9 " BOA VISTA" ATUBA                    2         750  900 
+  10 " MATRIZ"    CABRAL                  NA          NA   NA 
+  # … with 65 more rows
+```
+
+---
+
+
+
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+*ggplot(data = moradia_quarto2 )
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_1-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+* geom_sf()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_2-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+* coord_sf()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_3-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+  coord_sf() + 
+* aes(fill = casa)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_4-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+  coord_sf() + 
+  aes(fill = casa)  +
+* theme_void()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_5-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+  coord_sf() + 
+  aes(fill = casa)  +
+  theme_void() +
+* theme(panel.grid.major =  element_line(colour = "transparent"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_6-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+  coord_sf() + 
+  aes(fill = casa)  +
+  theme_void() +
+  theme(panel.grid.major =  element_line(colour = "transparent")) +
+* scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_7-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+  coord_sf() + 
+  aes(fill = casa)  +
+  theme_void() +
+  theme(panel.grid.major =  element_line(colour = "transparent")) +
+  scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
+* gghighlight(!is.na(casa), unhighlighted_params = list(colour = "gray70", fill = "gray90"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_8-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+  coord_sf() + 
+  aes(fill = casa)  +
+  theme_void() +
+  theme(panel.grid.major =  element_line(colour = "transparent")) +
+  scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
+  gghighlight(!is.na(casa), unhighlighted_params = list(colour = "gray70", fill = "gray90")) +
+* labs(fill = "Valor")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_9-1.png" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+# Opções de Cores 
+
+
+
+
+```r
+display.brewer.all(n = 9, select = nome_cor$data[[1]]$nome_cor)
+```
+
+&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+
+```r
+display.brewer.all(n = 9, select = nome_cor$data[[2]]$nome_cor)
+```
+
+&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+
+```r
+display.brewer.all(n = 9, select = nome_cor$data[[3]]$nome_cor)
+```
+
+&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Qual cor Escolher ?
+
+
+
+&lt;img src="./img/gg_cor.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Considerações das Cores 
+
+---
+## Escala 
+
+
+
+
+
+---
+
+# Escala (Qual paletta descreve melhor )
+
+&lt;img src="./img/gg_escala.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+---
+# Considerações Escala
+
+
+
+---
+## Mercado Imobiliário (Diferentes Quartos) 
+
+
+
+
+```
+  # A tibble: 99 x 3
+     bairro         quarto     apartamento
+     &lt;chr&gt;          &lt;chr&gt;            &lt;dbl&gt;
+   1 ABRANCHES      Quarto:  1        650 
+   2 ÁGUA VERDE     Quarto:  1       1150 
+   3 ÁGUA VERDE     Quarto:  2       1100 
+   4 AHÚ            Quarto:  1       1200 
+   5 ALTO BOQUEIRÃO Quarto:  1        600 
+   6 ALTO BOQUEIRÃO Quarto:  2        750 
+   7 ALTO DA RUA XV Quarto:  2       1094.
+   8 ATUBA          Quarto:  1        770 
+   9 ATUBA          Quarto:  2        750 
+  10 AUGUSTA        Quarto:  2        670 
+  # … with 89 more rows
+```
+
+---
+
+
+
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+*ggplot()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_1-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+* geom_sf(data = cwb, fill = "gray80", colour = "white")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_2-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray80", colour = "white") +
+* geom_sf(data = moradia_quarto2_1, aes(fill = casa))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_3-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray80", colour = "white") +
+  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+* facet_wrap(~quarto, ncol = 2)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_4-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray80", colour = "white") +
+  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  facet_wrap(~quarto, ncol = 2) +
+* scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_5-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray80", colour = "white") +
+  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  facet_wrap(~quarto, ncol = 2) +
+  scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
+* labs(fill = "Valor")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_6-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray80", colour = "white") +
+  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  facet_wrap(~quarto, ncol = 2) +
+  scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
+  labs(fill = "Valor")  +
+* theme_void()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_7-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray80", colour = "white") +
+  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  facet_wrap(~quarto, ncol = 2) +
+  scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
+  labs(fill = "Valor")  +
+  theme_void() +
+* theme(legend.key.size =  unit(0.5, "cm"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_8-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray80", colour = "white") +
+  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  facet_wrap(~quarto, ncol = 2) +
+  scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
+  labs(fill = "Valor")  +
+  theme_void() +
+  theme(legend.key.size =  unit(0.5, "cm")) + 
+* theme(panel.grid.major =  element_line(colour = "transparent"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_facetmapa_9-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+
+background-image: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-596722.jpg)
+background-size: cover
+
+
+
+
+---
+# EventBrite
+
+
+```
+  Simple feature collection with 106 features and 4 fields
+  geometry type:  POINT
+  dimension:      XY
+  bbox:           xmin: -49.36726 ymin: -25.56672 xmax: -49.22387 ymax: -25.38577
+  epsg (SRID):    4326
+  proj4string:    +proj=longlat +datum=WGS84 +no_defs
+  # A tibble: 106 x 5
+     title         data       tag_category  gratuito                 geometry
+     &lt;chr&gt;         &lt;date&gt;     &lt;chr&gt;         &lt;chr&gt;                 &lt;POINT [°]&gt;
+   1 PALESTRA GRA… 2019-04-08 Negócios      Sim          (-49.28203 -25.4494)
+   2 Workshop de … 2019-03-23 Saúde         Não         (-49.29301 -25.44788)
+   3 Maquiagem e … 2019-03-09 Moda e Beleza Sim          (-49.2754 -25.45029)
+   4 EMC Concept … 2019-06-03 Moda e Beleza Não         (-49.27912 -25.44277)
+   5 Empreenda Ma… 2019-03-14 Negócios      Sim         (-49.27718 -25.44322)
+   6 Formação Mov… 2019-06-08 Saúde         Não         (-49.23334 -25.45988)
+   7 WORKSHOP ENT… 2019-07-14 Moda e Beleza Não         (-49.23162 -25.45632)
+   8 Yôga (100% G… 2019-03-10 Saúde         Sim         (-49.27644 -25.42139)
+   9 Open Data Da… 2019-03-09 Ciência e Te… Sim         (-49.27224 -25.42481)
+  10 PALESTRA | C… 2019-03-30 Negócios      Sim          (-49.2722 -25.42782)
+  # … with 96 more rows
+```
+
+---
+
+
+  
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+*ggplot()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapaevento_1-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+* geom_sf(data = cwb, fill = "gray90", colour = "white")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapaevento_2-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray90", colour = "white") +
+* geom_sf(data = evento, show.legend = "point", size = 2)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapaevento_3-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray90", colour = "white") +
+  geom_sf(data = evento, show.legend = "point", size = 2) +
+* aes(colour = gratuito)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapaevento_4-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray90", colour = "white") +
+  geom_sf(data = evento, show.legend = "point", size = 2) +
+  aes(colour = gratuito) +
+* theme_void()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapaevento_5-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray90", colour = "white") +
+  geom_sf(data = evento, show.legend = "point", size = 2) +
+  aes(colour = gratuito) +
+  theme_void() + 
+* theme(legend.key.size =  unit(1.25, "cm"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapaevento_6-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb, fill = "gray90", colour = "white") +
+  geom_sf(data = evento, show.legend = "point", size = 2) +
+  aes(colour = gratuito) +
+  theme_void() + 
+  theme(legend.key.size =  unit(1.25, "cm")) + 
+* theme(panel.grid.major = element_line(colour = 'transparent'))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapaevento_7-1.png" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+
+
+
+---
+
+
+
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+*ggplot()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapabg_1-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+* geom_sf(data = cwb)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapabg_2-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+* annotation_map_tile(type = "cartolight", zoom = 11)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapabg_3-1.png" style="display: block; margin: auto;" /&gt;
+
+```
+  
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |=======                                                          |  11%
+  |                                                                       
+  |==============                                                   |  22%
+  |                                                                       
+  |======================                                           |  33%
+  |                                                                       
+  |=============================                                    |  44%
+  |                                                                       
+  |====================================                             |  56%
+  |                                                                       
+  |===========================================                      |  67%
+  |                                                                       
+  |===================================================              |  78%
+  |                                                                       
+  |==========================================================       |  89%
+  |                                                                       
+  |=================================================================| 100%
+```
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "cartolight", zoom = 11) +
+* geom_sf(data = evento, aes(colour = gratuito), show.legend = "point")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapabg_4-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "cartolight", zoom = 11) +
+  geom_sf(data = evento, aes(colour = gratuito), show.legend = "point") +
+* theme_void()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapabg_5-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "cartolight", zoom = 11) +
+  geom_sf(data = evento, aes(colour = gratuito), show.legend = "point") +
+  theme_void() + 
+* theme(panel.grid.major = element_line(colour = 'transparent'))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapabg_6-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+
+
+# Opções de Mapas 
+
++ Opções do pacote, mude o argumento `type`
+
+
+```r
+rosm::osm.types()
+```
+
+```
+   [1] "osm"                    "opencycle"             
+   [3] "hotstyle"               "loviniahike"           
+   [5] "loviniacycle"           "hikebike"              
+   [7] "hillshade"              "osmgrayscale"          
+   [9] "stamenbw"               "stamenwatercolor"      
+  [11] "osmtransport"           "thunderforestlandscape"
+  [13] "thunderforestoutdoors"  "cartodark"             
+  [15] "cartolight"
+```
+
++ registrar base map
+
+
+```r
+rosm::register_tile_source(mapa_wiki = "https://maps.wikimedia.org/osm-intl/${z}/${x}/${y}.png")
+```
+
++ Outras Opções
+
+&lt;a href=https://www.thunderforest.com/&gt; thunder forest&lt;/a&gt; 
+&lt;a href=https://www.xyht.com/spatial-itgis/using-openstreetmap-basemaps-qgis-3-0/&gt; WikiMaps&lt;/a&gt;
+
+
+
+&lt;style type="text/css"&gt;
+.remark-code{
+  line-height: 1.25; # Espaçamento das linhas nos códigos
+  font-size: 45% # tamanho da fonte nos códigos
+  }
+&lt;/style&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"slideNumberFormat": "%current%"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

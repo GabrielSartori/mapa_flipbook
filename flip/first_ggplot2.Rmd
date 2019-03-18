@@ -1,0 +1,47 @@
+---
+title: "first_ggplot2"
+author: "Gabriel Sartori"
+date: ""
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+---
+## Dados Imobiliários 
+
++ Valor de Locação
+
+```{r, echo = FALSE}
+moradia_quarto2  %>% 
+  select(regional, bairro, quarto, apartamento, casa)
+```
+
+```{r, echo = FALSE}
+media_moradia <- moradia_quarto2 %>% select(apartamento, casa) %>% apply(., 2, mean, na.rm = TRUE)
+media_ap <- media_moradia[1] %>% as.vector()
+media_casa <- media_moradia[2] %>% as.vector()
+```
+
+
+---
+```{r first_ggplot2, eval = F, echo = F, comment = " "}
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+  geom_hline(yintercept = media_casa, linetype = "dashed") +
+  gghighlight(apartamento > media_ap &  casa > media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+`r paste(knitr::knit(text = partial_knit_chunks("first_ggplot2")), collapse = "\n")`
+
+---

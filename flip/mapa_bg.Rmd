@@ -1,0 +1,22 @@
+---
+title: "first_"
+author: "Gabriel Sartori"
+date: ""
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+---
+
+```{r mapabg, eval = F, echo = F, comment = "", warning = FALSE}
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "cartolight", zoom = 11) +
+  geom_sf(data = evento, aes(colour = gratuito), show.legend = "point") +
+  theme_void() + 
+  theme(panel.grid.major = element_line(colour = 'transparent'))
+```
+
+`r paste(knitr::knit(text = partial_knit_chunks("mapabg")), collapse = "\n")`
+---

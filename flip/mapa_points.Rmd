@@ -1,0 +1,38 @@
+---
+title: "mapa_ponto"
+author: "Gabriel Sartori"
+date: ""
+output: html_document
+---
+
+---
+# EventBrite
+
+```{r, echo = FALSE}
+# evento <- readRDS("./data/eventbrite.RDS")
+# evento <- readRDS("./data/eventbrite.RDS")
+evento <- evento %>% 
+  select(-NOME, -NM_REGIONA) %>% 
+  distinct(title, .keep_all = TRUE) %>% 
+  mutate(gratuito = ifelse(moeda == "gratuito", "Sim", "Não")) %>% 
+  na.omit()
+
+evento %>% 
+  select(-moeda, -tag_format, -valor)
+```
+
+---
+
+```{r mapaevento, eval = F, echo = F, comment = " "}
+ggplot() +
+  geom_sf(data = cwb, fill = "gray90", colour = "white") +
+  geom_sf(data = evento, show.legend = "point", size = 2) +
+  aes(colour = gratuito) +
+  theme_void() + 
+  theme(legend.key.size =  unit(1.25, "cm")) + 
+  theme(panel.grid.major = element_line(colour = 'transparent'))
+```
+  
+`r paste(knitr::knit(text = partial_knit_chunks("mapaevento")), collapse = "\n")`
+
+---

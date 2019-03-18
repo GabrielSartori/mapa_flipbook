@@ -1,0 +1,33 @@
+---
+title: "first_ggplot2"
+author: "Gabriel Sartori"
+date: ""
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+---
+## Dados Imobiliários com Polígono
+
+```{r, echo = FALSE}
+moradia_quarto2  %>% 
+  select(regional, bairro, quarto, apartamento, casa)
+```
+
+---
+
+```{r firstmapa, eval = F, echo = F, comment = "" }
+ggplot(data = moradia_quarto2 ) +
+  geom_sf() +
+  coord_sf() + 
+  aes(fill = casa)  +
+  theme_void() +
+  theme(panel.grid.major =  element_line(colour = "transparent")) +
+  scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
+  gghighlight(!is.na(casa), unhighlighted_params = list(colour = "gray70", fill = "gray90")) +
+  labs(fill = "Valor") 
+```
+
+`r paste(knitr::knit(text = partial_knit_chunks("firstmapa")), collapse = "\n")`
