@@ -11,9 +11,13 @@ editor_options:
 ---
 ## Dados Imobiliários com Polígono
 
++ Somente Apartamento
+
 ```{r, echo = FALSE}
-moradia_quarto2  %>% 
-  select(regional, bairro, quarto, apartamento, casa)
+moradia_quarto2 %>% 
+  st_as_sf() %>%
+  select(regional, bairro, quarto, apartamento) %>% 
+  mutate(regional = trimws(regional))
 ```
 
 ---
@@ -22,11 +26,11 @@ moradia_quarto2  %>%
 ggplot(data = moradia_quarto2 ) +
   geom_sf() +
   coord_sf() + 
-  aes(fill = casa)  +
+  aes(fill = apartamento)  +
   theme_void() +
   theme(panel.grid.major =  element_line(colour = "transparent")) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
-  gghighlight(!is.na(casa), unhighlighted_params = list(colour = "gray70", fill = "gray90")) +
+  gghighlight(!is.na(apartamento), unhighlighted_params = list(colour = "gray70", fill = "gray90")) +
   labs(fill = "Valor") 
 ```
 

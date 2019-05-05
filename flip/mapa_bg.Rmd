@@ -7,13 +7,19 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r, echo = FALSE}
+cwb_union <- st_union(cwb)
+```
+
+
 ---
 
 ```{r mapabg, eval = F, echo = F, comment = "", warning = FALSE}
 ggplot() +
   geom_sf(data = cwb) +
-  annotation_map_tile(type = "cartolight", zoom = 11) +
+  annotation_map_tile(type = "cartolight", zoom = 12) +
   geom_sf(data = evento, aes(colour = gratuito), show.legend = "point") +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "gray40") +
   theme_void() + 
   theme(panel.grid.major = element_line(colour = 'transparent'))
 ```

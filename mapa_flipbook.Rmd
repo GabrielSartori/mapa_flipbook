@@ -25,24 +25,16 @@ background-size: cover
 
 <h2 style="font-size: 47px; position: relative;top: 300px; color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;text-align: center;"> Gabriel Sartori </h2>
 
----
-# Diferentes Mapas
+<!-- --- -->
+<!-- # Diferentes Mapas -->
 
 ```{r, warning = FALSE, message = FALSE, error = FALSE, echo = FALSE, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(fig.width = 5, fig.height = 5, comment = " ", dpi = 125, fig.align = "center")
+knitr::opts_chunk$set(fig.width = 5, fig.height = 5, comment = " ", dpi = 130, fig.align = "center")
 
 source("xaringan_reveal.R")
 source("./function/packages.R")
-
-# opts_chunk$set(echo = FALSE, 
-#               warning = FALSE, 
-#               message = FALSE, 
-#               error = FALSE,
-#               dpi = 150,
-#               fig.align = "center")
 ```
-
 
 
 ```{r, echo = FALSE}
@@ -59,7 +51,7 @@ terceiro <- readRDS(file = "./data/sub_terceiro.RDS")
 evento <- readRDS("./data/eventbrite.RDS")
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE}
 # Mediana do Valor m2 
 loca_tipologia_quarto <- 
   terceiro %>% 
@@ -77,19 +69,20 @@ moradia_quarto2 <-
   right_join(cwb, by = "bairro") 
 ```
 
-
-```{r, out.width = "60%", echo = FALSE}
-knitr::include_graphics('./img/diferentes_mapas.png')
-```
-
 ---
 # Bibliotecas R 
 
-<br><br>
+<br>
 <div class="img_center">
-<img src = "https://ggplot2.tidyverse.org/logo.png" alt = "gif2" />
-<img src = "https://user-images.githubusercontent.com/520851/34887433-ce1d130e-f7c6-11e7-83fc-d60ad4fae6bd.gif" style = "width: 270px;" alt = "gif" />
+<img src = "https://www.rstudio.com/wp-content/uploads/2014/04/ggplot2.png" alt = "gif2" width = "290px" />
 </div>
+--
+
++ Plus 
+```{r, eval = FALSE}
+devtools::install_github("yutannihilation/gghighlight")
+```
+
 
 
 ---
@@ -104,33 +97,9 @@ background-size: cover
 
 ```
 
----
-# Opções de Cores 
-
-```{r, echo = FALSE}
-nome_cor <-
-  brewer.pal.info %>% 
-  as.data.frame() %>% 
-  tibble::rownames_to_column("nome_cor") %>% 
-  group_by(category) %>% 
-  tidyr::nest() %>% 
-  mutate(data = purrr::map(.$data, ~sample_n(.x, 5)))
-```
-
-```{r, fig.width = 6, fig.height = 3}
-display.brewer.all(n = 9, select = nome_cor$data[[1]]$nome_cor)
-```
-
-```{r, fig.width = 6, fig.height = 3}
-display.brewer.all(n = 9, select = nome_cor$data[[2]]$nome_cor)
-```
-
-```{r, fig.width = 6, fig.height = 3}
-display.brewer.all(n = 9, select = nome_cor$data[[3]]$nome_cor)
-```
 
 ---
-# Qual cor Escolher ?
+# Qual paleta Escolher ?
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, dpi = 150}
 
@@ -151,7 +120,7 @@ ggcores <- function(dataset, cor, titulo) {
     # scale_fill_continuous(labels = br)
 }
 
-mapa_seq <- ggcores(moradia_quarto2, "YlOrRd", "Sequência")
+mapa_seq <- ggcores(moradia_quarto2, "Oranges", "Sequência")
 mapa_quali <- ggcores(moradia_quarto2, "Accent", "Qualitativas")
 mapa_div <- ggcores(moradia_quarto2, "PiYG", "Divergente")
 
@@ -163,11 +132,62 @@ mapa_div <- ggcores(moradia_quarto2, "PiYG", "Divergente")
 knitr::include_graphics('./img/gg_cor.png')
 ```
 
----
-## Considerações das Cores 
+```{r, echo = FALSE}
+nome_cor <-
+  brewer.pal.info %>% 
+  as.data.frame() %>% 
+  tibble::rownames_to_column("nome_cor") %>% 
+  group_by(category) %>% 
+  tidyr::nest() %>% 
+  mutate(data = purrr::map(.$data, ~sample_n(.x, 3)))
+```
+
 
 ---
-## Escala 
+# Paleta Sequencial
+
++ Adequado para variáveis numérica que mantém um mesmo matriz de cor, apenas com incrementos de brilho, do mais claro para o mais escuro, que indicam o quão menor ou maior é o valor.
+
++ Exemplo: Indicadores de Saúde, Segurança
+
+```{r, fig.width = 7, fig.height = 3, echo = FALSE, dpi = 100}
+display.brewer.all(n = 9, select = nome_cor$data[[3]]$nome_cor)
+```
+
++ Pacote `RColorBrewer`, veja todas as opções em `display.brewer.all()`
+
+---
+# Divergente
+
+
++ Indicado para valores que refletem a natureza de duas posições extremas
+
++ Adequado para variáveis em que o valor central é neutro, ou represente equilíbrio entre duas partes
+
++ Exemplo: Correlação Pearson [-1; 1]; Razão entre as ideologias políticas
+
+
+```{r, fig.width = 6, fig.height = 3, echo = FALSE, dpi = 100}
+display.brewer.all(n = 9, select = nome_cor$data[[1]]$nome_cor)
+```
+
+---
+# Paleta Qualitativa
+
++ Adequado para variáveis categóricas na qual deseja distingui-las
+
++ Não é adequado usar para representar variáveis numéricas
+
++ Exemplo: Partido político de cada município
+
+
+```{r, fig.width = 6, fig.height = 3, echo = FALSE, dpi = 100}
+display.brewer.all(n = 7, select = nome_cor$data[[2]]$nome_cor)
+```
+
+
+<!-- --- -->
+<!-- ## Escala  -->
 
 ```{r, echo = FALSE,  warning = FALSE, message = FALSE}
 
@@ -176,7 +196,7 @@ escala_quarto2 <-
   select(bairro, apartamento, geometry) %>%
   mutate(grp_same_size = cut_interval(apartamento, 5, dig.lab = 6)) %>%
   mutate(grp_quantile = cut_number(apartamento, 5, dig.lab = 6)) %>%
-  mutate(grp_fixed = cut(apartamento, breaks = c(0, 500, 1000, 1500, 2000, 3000), dig.lab = 5))
+  mutate(grp_fixed = cut(apartamento, breaks = c(0, 500, 750, 1500, 2000, 3000), dig.lab = 5))
 
 # Legenda kmeans
 legenda <- classInt::classIntervals(
@@ -193,14 +213,14 @@ escala_quarto2 <-
 
 # Function to include a big mark in thousand number
 convert_mark <- function(cut_variavel) {
-sapply(strsplit(levels(cut_variavel), " , "), 
-  function(x) 
-    paste(
-      prettyNum(x, 
-        big.mark = ".", 
-        preserve.width = "none"), 
-      collapse = " - ")) %>% 
-  gsub(",", "-", .)  
+  sapply(strsplit(levels(cut_variavel), " , "), 
+         function(x) 
+           paste(
+             prettyNum(x, 
+                       big.mark = ".", 
+                       preserve.width = "none"), 
+             collapse = " - ")) %>% 
+    gsub(",", "-", .)  
 }
 
 
@@ -228,7 +248,7 @@ for(i in 1: length(nomes_escala)){
       plot.title = element_text(hjust = 0.5),
       legend.key.size = unit(0.5, "cm"),
       legend.text = element_text(size = 11)) + 
-    scale_fill_brewer(palette ="YlOrRd", na.translate = F) +
+    scale_fill_brewer(palette ="Oranges", na.translate = F) +
     gghighlight(!is.na(nomes_escala[i]), unhighlighted_params = list(colour = "gray70", fill = "gray90")) +
     labs(fill = "", title = titulo[i])  +
     guides(fill = guide_legend(reverse = T))
@@ -237,10 +257,8 @@ for(i in 1: length(nomes_escala)){
 
 # g_escala <-  gridExtra::grid.arrange(plot[[1]], plot[[2]], plot[[3]], plot[[4]], ncol = 2)
 # ggsave(file="whatever4.png", g_escala, width = 10, height = 15)
-
 ```
 ---
-
 # Escala (Qual paletta descreve melhor )
 
 ```{r, out.width = "100%", echo = FALSE, out.height = "100%"}
@@ -248,7 +266,69 @@ knitr::include_graphics('./img/gg_escala.png')
 ```
 
 ---
+# Distribuição dos grupos por Escala
+
+```{r,  echo = FALSE, dpi = 150, warning = FALSE, message = FALSE}
+n_escala <- function(.data, group_col) {
+.data %>% 
+  dplyr::group_by(!!rlang::ensym(group_col)) %>% 
+  na.omit() %>%
+  count()
+} 
+
+gg_escala <- function(dados, group_n, n, titulo) { 
+  ggplot(data = dados, aes_string(x = group_n, y =  n, fill = group_n)) +
+    geom_bar(stat = 'identity', colour = "gray25") +
+    scale_fill_brewer(palette = "Oranges") +
+    geom_text(aes_string(label = n), vjust = "inward", hjust = 0.5, colour = "gray25") +
+    guides(fill = FALSE) +
+    labs(x = "", y = "Bairros", title = titulo) +
+    theme_bw() +
+    theme(axis.text.x = element_text(face = 'bold', size = 10),
+          plot.title  = element_text(hjust = 0.5))
+    
+}
+```
+
+```{r, echo = FALSE, eval = FALSE, warning = FALSE, message = FALSE}
+equal <- 
+  n_escala(escala_quarto2, "grp_same_size")  %>% 
+  gg_escala(., "grp_same_size", "n", "Escala Equal")
+
+fixa <- 
+  n_escala(escala_quarto2, "grp_fixed")  %>% 
+  gg_escala(., "grp_fixed", "n", "Escala Fixa")
+
+quantil <- 
+  n_escala(escala_quarto2, "grp_quantile")  %>% 
+  gg_escala(., "grp_quantile", "n", "Escala Quantil")
+
+kmeans <- 
+  n_escala(escala_quarto2, "grp_kmeans")  %>% 
+  gg_escala(., "grp_kmeans", "n", "Escala Kmeans")
+
+g_bar_escala <-  gridExtra::grid.arrange(equal, fixa, quantil, kmeans, ncol = 2)
+ggsave(file = "./img/grupos_escala.png", g_bar_escala, width = 13, height = 7)
+```
+
+
+```{r, out.width = "100%", echo = FALSE, out.height = "100%"}
+knitr::include_graphics('./img/grupos_escala.png')
+```
+
+---
 # Considerações Escala
+
++ Definir escalas, consiste em criar grupos distintos  
+
++ Prefira escalas que remetam a interpretações práticas dos grupos
+
++ As escalas quantílicas e kmeans, ou qualquer método de agrupamento são critérios estatísticos
+
++ Na dúvida, ou sem uma escala pré-existente da área, exponha diferentes escalas que podem ser feitas
+
++ Número impar de grupos, sugere que o grupo intermediário tenha uma interpretação neutra
+
 
 ```{r, child="flip/facet_mapa.Rmd", warning = FALSE, message = FALSE}
 
@@ -258,21 +338,28 @@ background-image: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-
 background-size: cover
 
 
-```{r, child="flip/mapa_points.Rmd", warning = FALSE, message = FALSE}
+```{r, child="flip/mapa_points.Rmd", warning = FALSE, message = FALSE, eval = TRUE}
 
 ```
 
-```{r, child="flip/mapa_bg.Rmd", warning = FALSE, message = FALSE}
+# Basemaps
+
+```{r, out.width = "85%", echo = FALSE, out.height = "90%"}
+knitr::include_graphics('./img/basemaps.jpg')
+```
+
+
+```{r, child="flip/mapa_bg.Rmd", warning = FALSE, message = FALSE, eval = TRUE}
 
 ```
 
 
 # Opções de Mapas 
 
-+ Opções do pacote, mude o argumento `type`
++ Opções do pacote, mude o argumento `type` da função `annotation_map_tile`
 
 ```{r}
-rosm::osm.types()
+rosm::osm.types() # Alguns precisam de api
 ```
 
 + registrar base map
@@ -281,13 +368,170 @@ rosm::osm.types()
 rosm::register_tile_source(mapa_wiki = "https://maps.wikimedia.org/osm-intl/${z}/${x}/${y}.png")
 ```
 
-+ Outras Opções
++ Sites que disponibilizam basemaps
 
+<a href= http://leaflet-extras.github.io/leaflet-providers/preview/index.html/> leaflet </a>
 <a href=https://www.thunderforest.com/> thunder forest</a> <br>
 <a href=https://www.xyht.com/spatial-itgis/using-openstreetmap-basemaps-qgis-3-0/> WikiMaps</a>
 
 ---
-# Import Spatial Object
+# Leitura Objeto Espacial
+
+<br>
+<div class="img_center">
+<img src = "https://user-images.githubusercontent.com/520851/34887433-ce1d130e-f7c6-11e7-83fc-d60ad4fae6bd.gif" style = "width: 270px;" alt = "gif" />
+</div>
+
+---
+# Formatos Geográficos
+
+<br>
+<img src = "./img/shapefile.png" style = "width: 259px;" alt = "shapefile" />
+<img src = "./img/geojson.png" style = "width: 261px;" alt = "geojson" />
+<img src = "./img/kml.png" style = "width: 197px;" alt = "kml" />
+<img src = "./img/tiff.png" style = "width: 261px;" alt = "tiff" />
+
+---
+## Ênfase
+
+<br>
+<img src = "./img/shapefile.png" style = "width: 259px;" alt = "shapefile" />
+<img src = "./img/geojson.png" style = "width: 261px;" alt = "geojson" />
+
+---
+# Shapefile e Geojson
+
+*Shapefile*
++ .shp; .shx; .dbf  (devem estar na mesma pasta)
++ .prj - opcional
+
+```{r, eval = FALSE}
+require(sf)
+cwb <- read_sf(
+  dsn = "/home/gabriel/suporte/ciencia_de_dados/base_de_dado/ipppuc/bairro_sirgas", # caminho do arquivo
+  layer = "DIVISA_DE_BAIRROS") # nome do arquivo
+```
+
+--
+*Geojson*
++ .geojson
+
+```{r}
+require(geojsonsf)
+cwb <- geojson_sf("https://raw.githubusercontent.com/gustavokira/geo-curitiba/master/json/bairros.geo.json")
+```
+
+---
+# Resultado
+
+```{r}
+cwb
+```
+
+---
+# Bases de Dados Espaciais
+
+<br> 
+**Explore as bases de dados espaciais**
+
++ [IPPUC][ippuc]
++ [estados do Brasil][brasil-geojson]
++ [Instituto de Terras, Cartografia e Geologia do Paraná][itcg]
++ [data-gov][data-energy]
++ [EUA][data-gov]
++ [energia][data-energy]
++ [World Resource Institute][world-resource-institute]
+
+---
+# Criando Objeto Espacial
+
+<br> 
+
++ Vamos considerar que você recebeu um conjunto de latitude e longitude (ponto) e deseja transformar em objeto espacial!
++ Dados de Monitoramento de Qualidade da água em Curitiba 
+
+```{r,  warning = FALSE, message = FALSE, eval = TRUE, echo = FALSE}
+file_lat_long <- "/home/gabriel/suporte/ciencia_de_dados/base_de_dado/qualidade_agua/geo_iqa_metadado.xlsx"
+# readr::read_delim(file = file_lat_long)
+geo_iqa <- readxl::read_xlsx(path = file_lat_long, sheet = 1)
+
+# filtrar curitiba
+geo_iqa_cwb <- geo_iqa %>% 
+  filter(munic == "Curitiba")
+
+qualidade_agua <- 
+  geo_iqa_cwb %>% 
+  select(lat.sirgas2000, long.sirgas2000) %>% 
+  mutate_all(funs(gsub(",", ".",.))) %>% 
+  mutate_if(is.character, as.numeric) %>% 
+  cbind(geo_iqa_cwb$id, geo_iqa_cwb$ph) %>% as_tibble() %>% 
+  plyr::rename(c("lat.sirgas2000" = "latitude",
+                 "long.sirgas2000" = "longitude", 
+                 "geo_iqa_cwb$id" = "id_estacao",
+                 "geo_iqa_cwb$ph" = "ph")) %>% 
+  select(id_estacao, ph, latitude, longitude) %>% 
+  mutate(id_estacao = as.character(id_estacao))
+
+qualidade_agua %>% head() %>% 
+  glimpse()
+```
+
++ Formato do Dado
+
+```{r}
+qualidade_agua %>% class()
+```
+
+--
++ *Se você tentar um plot.. vai acontecer isso*
+
+---
+
+```{r, echo = TRUE, dpi = 150, fig.width = 6, fig.height = 4}
+plot(qualidade_agua)
+```
+
+---
+# Transformando em objeto espacial
+
+```{r, echo = TRUE}
+sf_qualidade_agua <- 
+  sf::st_as_sf(x = qualidade_agua, # base de dados
+              coords = c("longitude", "latitude"),  # Variaveis espaciais
+              agr = "identity", # Atributo identidade
+              crs = 4326)   # Sistema de refereencia geografica
+```
+
++ Formato do Dado
+
+```{r}
+sf_qualidade_agua %>% head(n = 1)
+```
+
++  <a href = "https://bookdown.org/robinlovelace/geocompr/spatial-class.html#crs-intro"> detalhes crs </a>
+
+
+```{r, child="flip/mapa_qualidade.Rmd", warning = FALSE, message = FALSE, eval = TRUE}
+
+```
+
+
+# Referência
+
+<a href="https://geocompr.robinlovelace.net/">
+<img bordxer="0" alt="tops" src="./img/geocomputing.jpeg" width="399" height="520">
+</a>
+
+---
+# Agradecimentos
+
+<br>
+
++ Daniel Ruffasto, scrapping dos eventos 
+
++ Equipe MAPI
+
+
 
 
 ```{css, eval = TRUE, echo = F}
@@ -313,3 +557,13 @@ rosm::register_tile_source(mapa_wiki = "https://maps.wikimedia.org/osm-intl/${z}
 
 
 
+[ippuc]: http://ippuc.org.br/geodownloads/geo.htm
+[brasil-geojson]: https://github.com/tbrugz/geodata-br
+[data-gov]: https://catalog.data.gov/organization/01ca8df8-6248-41e6-baa2-8b682e4b5a08?res_format=SHP&_res_format_limit=0
+[data-energy]: https://energydata.info/dataset?res_format=GeoJSON&page=1
+[data-gov]: http://dados.gov.br/dataset?res_format=ZIP+SHP&_res_format_limit=0
+[itcg]: http://www.itcg.pr.gov.br/modules/faq/category.php?categoryid=9#
+[world-resource-institute]: http://datasets.wri.org/dataset?q=Forests&res_format=GeoJSON
+[geocomputing]: 
+
+<!-- https://geocompr.robinlovelace.net/images/cover.png -->

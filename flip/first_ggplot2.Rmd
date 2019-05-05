@@ -10,11 +10,16 @@ editor_options:
 ---
 ## Dados Imobiliários 
 
-+ Valor de Locação
++ Curitiba
++ Valor Locação 
++ Apartamento/Casa 
++ Quartos: 2
+
 
 ```{r, echo = FALSE}
 moradia_quarto2  %>% 
-  select(regional, bairro, quarto, apartamento, casa)
+  select(regional, bairro, quarto, apartamento, casa) %>% 
+  mutate(regional = trimws(regional))
 ```
 
 ```{r, echo = FALSE}
@@ -35,13 +40,13 @@ ggplot(data = moradia_quarto2) +
   labs(title = "Relação Valor Locação Casa e Apartamento") + 
   geom_vline(xintercept = media_ap, linetype = "dashed") +
   geom_hline(yintercept = media_casa, linetype = "dashed") +
-  gghighlight(apartamento > media_ap &  casa > media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  gghighlight(apartamento > media_ap & casa > media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
   geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
   theme_bw() +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(labels= number_br)+
+  scale_x_continuous(labels= number_br)
 ```
 
 
 `r paste(knitr::knit(text = partial_knit_chunks("first_ggplot2")), collapse = "\n")`
-
----

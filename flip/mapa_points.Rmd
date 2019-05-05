@@ -3,10 +3,24 @@ title: "mapa_ponto"
 author: "Gabriel Sartori"
 date: ""
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ---
-# EventBrite
+# [Evertbrite](https://www.eventbrite.com.br/)
+
+```{r, out.width = "95%", echo = FALSE, out.height = "100%"}
+knitr::include_graphics('./img/evertbrite.png')
+```
+
+
+
+---
+# Eventos Curitiba
+
++ Livres/Pagos
++ Extração dos eventos 08/03
 
 ```{r, echo = FALSE}
 # evento <- readRDS("./data/eventbrite.RDS")
@@ -29,7 +43,7 @@ ggplot() +
   geom_sf(data = evento, show.legend = "point", size = 2) +
   aes(colour = gratuito) +
   theme_void() + 
-  theme(legend.key.size =  unit(1.25, "cm")) + 
+  theme(legend.key.size =  unit(1.15, "cm")) + 
   theme(panel.grid.major = element_line(colour = 'transparent'))
 ```
   

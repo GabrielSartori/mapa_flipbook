@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Mapa flipbook</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Gabriel Sartori" />
     <link rel="stylesheet" href="css/shinobi.css" type="text/css" />
     <link rel="stylesheet" href="css/ninpo.css" type="text/css" />
@@ -21,8 +21,8 @@ background-size: cover
 
 &lt;h2 style="font-size: 47px; position: relative;top: 300px; color: white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;text-align: center;"&gt; Gabriel Sartori &lt;/h2&gt;
 
----
-# Diferentes Mapas
+&lt;!-- --- --&gt;
+&lt;!-- # Diferentes Mapas --&gt;
 
 
 
@@ -33,23 +33,22 @@ background-size: cover
 
 
 
-
-```
-  Warning: Column `bairro` joining character vector and factor, coercing into
-  character vector
-```
-
-
-&lt;img src="./img/diferentes_mapas.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 # Bibliotecas R 
 
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 &lt;div class="img_center"&gt;
-&lt;img src = "https://ggplot2.tidyverse.org/logo.png" alt = "gif2" /&gt;
-&lt;img src = "https://user-images.githubusercontent.com/520851/34887433-ce1d130e-f7c6-11e7-83fc-d60ad4fae6bd.gif" style = "width: 270px;" alt = "gif" /&gt;
+&lt;img src = "https://www.rstudio.com/wp-content/uploads/2014/04/ggplot2.png" alt = "gif2" width = "290px" /&gt;
 &lt;/div&gt;
+--
+
++ Plus 
+
+```r
+devtools::install_github("yutannihilation/gghighlight")
+```
+
 
 
 ---
@@ -61,23 +60,27 @@ background-size: cover
 ---
 ## Dados Imobiliários 
 
-+ Valor de Locação
++ Curitiba
++ Valor Locação 
++ Apartamento/Casa 
++ Quartos: 2
+
 
 
 ```
   # A tibble: 75 x 5
-     regional     bairro              quarto apartamento  casa
-     &lt;chr&gt;        &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-   1 " PORTÃO"    ÁGUA VERDE               2        1100  675 
-   2 " MATRIZ"    JARDIM SOCIAL           NA          NA   NA 
-   3 " BOQUEIRÃO" XAXIM                    2         950  750 
-   4 " CAJURU"    JARDIM DAS AMÉRICAS      2         950 1500 
-   5 " PORTÃO"    GUAÍRA                   2        1100  550 
-   6 " BOA VISTA" BAIRRO ALTO              2         750  700 
-   7 " MATRIZ"    SÃO FRANCISCO            2        1280 1238.
-   8 " MATRIZ"    ALTO DA GLÓRIA          NA          NA   NA 
-   9 " BOA VISTA" ATUBA                    2         750  900 
-  10 " MATRIZ"    CABRAL                  NA          NA   NA 
+     regional  bairro              quarto apartamento  casa
+     &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+   1 PORTÃO    ÁGUA VERDE               2        1100  675 
+   2 MATRIZ    JARDIM SOCIAL           NA          NA   NA 
+   3 BOQUEIRÃO XAXIM                    2         950  750 
+   4 CAJURU    JARDIM DAS AMÉRICAS      2         950 1500 
+   5 PORTÃO    GUAÍRA                   2        1100  550 
+   6 BOA VISTA BAIRRO ALTO              2         750  700 
+   7 MATRIZ    SÃO FRANCISCO            2        1280 1238.
+   8 MATRIZ    ALTO DA GLÓRIA          NA          NA   NA 
+   9 BOA VISTA ATUBA                    2         750  900 
+  10 MATRIZ    CABRAL                  NA          NA   NA 
   # … with 65 more rows
 ```
 
@@ -256,7 +259,7 @@ ggplot(data = moradia_quarto2) +
   labs(title = "Relação Valor Locação Casa e Apartamento") + 
   geom_vline(xintercept = media_ap, linetype = "dashed") +
   geom_hline(yintercept = media_casa, linetype = "dashed") +
-* gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white"))
+* gghighlight(apartamento &gt; media_ap &amp; casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white"))
 ```
 ]]
 .column[.content.center[
@@ -278,7 +281,7 @@ ggplot(data = moradia_quarto2) +
   labs(title = "Relação Valor Locação Casa e Apartamento") + 
   geom_vline(xintercept = media_ap, linetype = "dashed") +
   geom_hline(yintercept = media_casa, linetype = "dashed") +
-  gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  gghighlight(apartamento &gt; media_ap &amp; casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
 * geom_text_repel(aes(label = tolower(bairro)), colour = "darkred")
 ```
 ]]
@@ -301,7 +304,7 @@ ggplot(data = moradia_quarto2) +
   labs(title = "Relação Valor Locação Casa e Apartamento") + 
   geom_vline(xintercept = media_ap, linetype = "dashed") +
   geom_hline(yintercept = media_casa, linetype = "dashed") +
-  gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  gghighlight(apartamento &gt; media_ap &amp; casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
   geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
 * theme_bw()
 ```
@@ -325,7 +328,7 @@ ggplot(data = moradia_quarto2) +
   labs(title = "Relação Valor Locação Casa e Apartamento") + 
   geom_vline(xintercept = media_ap, linetype = "dashed") +
   geom_hline(yintercept = media_casa, linetype = "dashed") +
-  gghighlight(apartamento &gt; media_ap &amp;  casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  gghighlight(apartamento &gt; media_ap &amp; casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
   geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
   theme_bw() +
 * theme(plot.title = element_text(hjust = 0.5))
@@ -334,8 +337,59 @@ ggplot(data = moradia_quarto2) +
 .column[.content.center[
 &lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_13-1.png" style="display: block; margin: auto;" /&gt;
 ]]
-
 ---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+  geom_hline(yintercept = media_casa, linetype = "dashed") +
+  gghighlight(apartamento &gt; media_ap &amp; casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+* scale_y_continuous(labels= number_br)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_14-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot(data = moradia_quarto2) +
+  aes(x = apartamento) +
+  aes(y = casa) +
+  geom_point(colour = "purple") +
+  labs(x = "Apartamento") + 
+  labs(y = "Casa") +
+  labs(title = "Relação Valor Locação Casa e Apartamento") + 
+  geom_vline(xintercept = media_ap, linetype = "dashed") +
+  geom_hline(yintercept = media_casa, linetype = "dashed") +
+  gghighlight(apartamento &gt; media_ap &amp; casa &gt; media_casa, unhighlighted_params = list(colour = "white", fill = "white")) +
+  geom_text_repel(aes(label = tolower(bairro)), colour = "darkred") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(labels= number_br)+
+* scale_x_continuous(labels= number_br)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_first_ggplot2_15-1.png" style="display: block; margin: auto;" /&gt;
+]]
 
 
 
@@ -343,21 +397,29 @@ ggplot(data = moradia_quarto2) +
 ---
 ## Dados Imobiliários com Polígono
 
++ Somente Apartamento
+
 
 ```
+  Simple feature collection with 75 features and 4 fields
+  geometry type:  POLYGON
+  dimension:      XY
+  bbox:           xmin: -49.3888 ymin: -25.64456 xmax: -49.18322 ymax: -25.34636
+  epsg (SRID):    4326
+  proj4string:    +proj=longlat +datum=WGS84 +no_defs
   # A tibble: 75 x 5
-     regional     bairro              quarto apartamento  casa
-     &lt;chr&gt;        &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-   1 " PORTÃO"    ÁGUA VERDE               2        1100  675 
-   2 " MATRIZ"    JARDIM SOCIAL           NA          NA   NA 
-   3 " BOQUEIRÃO" XAXIM                    2         950  750 
-   4 " CAJURU"    JARDIM DAS AMÉRICAS      2         950 1500 
-   5 " PORTÃO"    GUAÍRA                   2        1100  550 
-   6 " BOA VISTA" BAIRRO ALTO              2         750  700 
-   7 " MATRIZ"    SÃO FRANCISCO            2        1280 1238.
-   8 " MATRIZ"    ALTO DA GLÓRIA          NA          NA   NA 
-   9 " BOA VISTA" ATUBA                    2         750  900 
-  10 " MATRIZ"    CABRAL                  NA          NA   NA 
+     regional  bairro   quarto apartamento                           geometry
+     &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;                      &lt;POLYGON [°]&gt;
+   1 PORTÃO    ÁGUA VE…      2        1100 ((-49.27066 -25.45263, -49.27037 …
+   2 MATRIZ    JARDIM …     NA          NA ((-49.22951 -25.41608, -49.22951 …
+   3 BOQUEIRÃO XAXIM         2         950 ((-49.26449 -25.48781, -49.26363 …
+   4 CAJURU    JARDIM …      2         950 ((-49.22732 -25.47163, -49.22832 …
+   5 PORTÃO    GUAÍRA        2        1100 ((-49.28195 -25.47656, -49.28304 …
+   6 BOA VISTA BAIRRO …      2         750 ((-49.20701 -25.39856, -49.20701 …
+   7 MATRIZ    SÃO FRA…      2        1280 ((-49.27193 -25.42794, -49.27266 …
+   8 MATRIZ    ALTO DA…     NA          NA ((-49.26295 -25.4153, -49.26295 -…
+   9 BOA VISTA ATUBA         2         750 ((-49.20707 -25.37203, -49.20706 …
+  10 MATRIZ    CABRAL       NA          NA ((-49.24056 -25.40934, -49.24056 …
   # … with 65 more rows
 ```
 
@@ -416,7 +478,7 @@ count: false
 ggplot(data = moradia_quarto2 ) +
   geom_sf() +
   coord_sf() + 
-* aes(fill = casa)
+* aes(fill = apartamento)
 ```
 ]]
 .column[.content.center[
@@ -432,7 +494,7 @@ count: false
 ggplot(data = moradia_quarto2 ) +
   geom_sf() +
   coord_sf() + 
-  aes(fill = casa)  +
+  aes(fill = apartamento)  +
 * theme_void()
 ```
 ]]
@@ -449,7 +511,7 @@ count: false
 ggplot(data = moradia_quarto2 ) +
   geom_sf() +
   coord_sf() + 
-  aes(fill = casa)  +
+  aes(fill = apartamento)  +
   theme_void() +
 * theme(panel.grid.major =  element_line(colour = "transparent"))
 ```
@@ -467,7 +529,7 @@ count: false
 ggplot(data = moradia_quarto2 ) +
   geom_sf() +
   coord_sf() + 
-  aes(fill = casa)  +
+  aes(fill = apartamento)  +
   theme_void() +
   theme(panel.grid.major =  element_line(colour = "transparent")) +
 * scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br)
@@ -486,11 +548,11 @@ count: false
 ggplot(data = moradia_quarto2 ) +
   geom_sf() +
   coord_sf() + 
-  aes(fill = casa)  +
+  aes(fill = apartamento)  +
   theme_void() +
   theme(panel.grid.major =  element_line(colour = "transparent")) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
-* gghighlight(!is.na(casa), unhighlighted_params = list(colour = "gray70", fill = "gray90"))
+* gghighlight(!is.na(apartamento), unhighlighted_params = list(colour = "gray70", fill = "gray90"))
 ```
 ]]
 .column[.content.center[
@@ -506,11 +568,11 @@ count: false
 ggplot(data = moradia_quarto2 ) +
   geom_sf() +
   coord_sf() + 
-  aes(fill = casa)  +
+  aes(fill = apartamento)  +
   theme_void() +
   theme(panel.grid.major =  element_line(colour = "transparent")) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
-  gghighlight(!is.na(casa), unhighlighted_params = list(colour = "gray70", fill = "gray90")) +
+  gghighlight(!is.na(apartamento), unhighlighted_params = list(colour = "gray70", fill = "gray90")) +
 * labs(fill = "Valor")
 ```
 ]]
@@ -518,80 +580,124 @@ ggplot(data = moradia_quarto2 ) +
 &lt;img src="mapa_flipbook_files/figure-html/output_firstmapa_9-1.png" style="display: block; margin: auto;" /&gt;
 ]]
 
----
-# Opções de Cores 
-
-
-
-
-```r
-display.brewer.all(n = 9, select = nome_cor$data[[1]]$nome_cor)
-```
-
-&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
-
-
-```r
-display.brewer.all(n = 9, select = nome_cor$data[[2]]$nome_cor)
-```
-
-&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
-
-
-```r
-display.brewer.all(n = 9, select = nome_cor$data[[3]]$nome_cor)
-```
-
-&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-# Qual cor Escolher ?
+# Qual paleta Escolher ?
 
 
 
 &lt;img src="./img/gg_cor.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
----
-## Considerações das Cores 
-
----
-## Escala 
-
-
 
 
 
 ---
+# Paleta Sequencial
 
++ Adequado para variáveis numérica que mantém um mesmo matriz de cor, apenas com incrementos de brilho, do mais claro para o mais escuro, que indicam o quão menor ou maior é o valor.
+
++ Exemplo: Indicadores de Saúde, Segurança
+
+&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
++ Pacote `RColorBrewer`, veja todas as opções em `display.brewer.all()`
+
+---
+# Divergente
+
+
++ Indicado para valores que refletem a natureza de duas posições extremas
+
++ Adequado para variáveis em que o valor central é neutro, ou represente equilíbrio entre duas partes
+
++ Exemplo: Correlação Pearson [-1; 1]; Razão entre as ideologias políticas
+
+
+&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Paleta Qualitativa
+
++ Adequado para variáveis categóricas na qual deseja distingui-las
+
++ Não é adequado usar para representar variáveis numéricas
+
++ Exemplo: Partido político de cada município
+
+
+&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+
+&lt;!-- --- --&gt;
+&lt;!-- ## Escala  --&gt;
+
+
+
+
+
+---
 # Escala (Qual paletta descreve melhor )
 
 &lt;img src="./img/gg_escala.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
 
 ---
+# Distribuição dos grupos por Escala
+
+
+
+
+
+
+&lt;img src="./img/grupos_escala.png" width="100%" height="100%" style="display: block; margin: auto;" /&gt;
+
+---
 # Considerações Escala
+
++ Definir escalas, consiste em criar grupos distintos  
+
++ Prefira escalas que remetam a interpretações práticas dos grupos
+
++ As escalas quantílicas e kmeans, ou qualquer método de agrupamento são critérios estatísticos
+
++ Na dúvida, ou sem uma escala pré-existente da área, exponha diferentes escalas que podem ser feitas
+
++ Número impar de grupos, sugere que o grupo intermediário tenha uma interpretação neutra
+
 
 
 
 ---
-## Mercado Imobiliário (Diferentes Quartos) 
+## Mercado Imobiliário 
+
++ Curitiba
++ Valor Locação 
++ Apartamento
++ Quartos: 1 e 2
+
 
 
 
 
 ```
-  # A tibble: 99 x 3
-     bairro         quarto     apartamento
-     &lt;chr&gt;          &lt;chr&gt;            &lt;dbl&gt;
-   1 ABRANCHES      Quarto:  1        650 
-   2 ÁGUA VERDE     Quarto:  1       1150 
-   3 ÁGUA VERDE     Quarto:  2       1100 
-   4 AHÚ            Quarto:  1       1200 
-   5 ALTO BOQUEIRÃO Quarto:  1        600 
-   6 ALTO BOQUEIRÃO Quarto:  2        750 
-   7 ALTO DA RUA XV Quarto:  2       1094.
-   8 ATUBA          Quarto:  1        770 
-   9 ATUBA          Quarto:  2        750 
-  10 AUGUSTA        Quarto:  2        670 
+  Simple feature collection with 99 features and 3 fields
+  geometry type:  POLYGON
+  dimension:      XY
+  bbox:           xmin: -49.38664 ymin: -25.63296 xmax: -49.18322 ymax: -25.34663
+  epsg (SRID):    4326
+  proj4string:    +proj=longlat +datum=WGS84 +no_defs
+  # A tibble: 99 x 4
+     bairro    quarto   apartamento                                  geometry
+     &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;                             &lt;POLYGON [°]&gt;
+   1 ABRANCHES Quarto:…        650  ((-49.2705 -25.34667, -49.27038 -25.3467…
+   2 ÁGUA VER… Quarto:…       1150  ((-49.27066 -25.45263, -49.27037 -25.453…
+   3 ÁGUA VER… Quarto:…       1100  ((-49.27066 -25.45263, -49.27037 -25.453…
+   4 AHÚ       Quarto:…       1200  ((-49.25776 -25.39402, -49.25732 -25.394…
+   5 ALTO BOQ… Quarto:…        600  ((-49.24899 -25.51736, -49.24869 -25.517…
+   6 ALTO BOQ… Quarto:…        750  ((-49.24899 -25.51736, -49.24869 -25.517…
+   7 ALTO DA … Quarto:…       1094. ((-49.25457 -25.43278, -49.25521 -25.433…
+   8 ATUBA     Quarto:…        770  ((-49.20707 -25.37203, -49.20706 -25.372…
+   9 ATUBA     Quarto:…        750  ((-49.20707 -25.37203, -49.20706 -25.372…
+  10 AUGUSTA   Quarto:…        670  ((-49.38558 -25.44318, -49.38465 -25.443…
   # … with 89 more rows
 ```
 
@@ -634,7 +740,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-* geom_sf(data = moradia_quarto2_1, aes(fill = casa))
+* geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))
 ```
 ]]
 .column[.content.center[
@@ -649,7 +755,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))  +
 * facet_wrap(~quarto, ncol = 2)
 ```
 ]]
@@ -665,7 +771,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))  +
   facet_wrap(~quarto, ncol = 2) +
 * scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br)
 ```
@@ -682,7 +788,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))  +
   facet_wrap(~quarto, ncol = 2) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
 * labs(fill = "Valor")
@@ -700,7 +806,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))  +
   facet_wrap(~quarto, ncol = 2) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
   labs(fill = "Valor")  +
@@ -719,7 +825,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))  +
   facet_wrap(~quarto, ncol = 2) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
   labs(fill = "Valor")  +
@@ -739,7 +845,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))  +
   facet_wrap(~quarto, ncol = 2) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
   labs(fill = "Valor")  +
@@ -760,17 +866,27 @@ background-size: cover
 
 
 ---
-# EventBrite
+# [Evertbrite](https://www.eventbrite.com.br/)
+
+&lt;img src="./img/evertbrite.png" width="95%" height="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+# Eventos Curitiba
+
++ Livres/Pagos
++ Extração dos eventos 08/03
 
 
 ```
-  Simple feature collection with 106 features and 4 fields
+  Simple feature collection with 107 features and 4 fields
   geometry type:  POINT
   dimension:      XY
   bbox:           xmin: -49.36726 ymin: -25.56672 xmax: -49.22387 ymax: -25.38577
   epsg (SRID):    4326
   proj4string:    +proj=longlat +datum=WGS84 +no_defs
-  # A tibble: 106 x 5
+  # A tibble: 107 x 5
      title         data       tag_category  gratuito                 geometry
      &lt;chr&gt;         &lt;date&gt;     &lt;chr&gt;         &lt;chr&gt;                 &lt;POINT [°]&gt;
    1 PALESTRA GRA… 2019-04-08 Negócios      Sim          (-49.28203 -25.4494)
@@ -783,7 +899,7 @@ background-size: cover
    8 Yôga (100% G… 2019-03-10 Saúde         Sim         (-49.27644 -25.42139)
    9 Open Data Da… 2019-03-09 Ciência e Te… Sim         (-49.27224 -25.42481)
   10 PALESTRA | C… 2019-03-30 Negócios      Sim          (-49.2722 -25.42782)
-  # … with 96 more rows
+  # … with 97 more rows
 ```
 
 ---
@@ -876,7 +992,7 @@ ggplot() +
   geom_sf(data = evento, show.legend = "point", size = 2) +
   aes(colour = gratuito) +
   theme_void() + 
-* theme(legend.key.size =  unit(1.25, "cm"))
+* theme(legend.key.size =  unit(1.15, "cm"))
 ```
 ]]
 .column[.content.center[
@@ -894,7 +1010,7 @@ ggplot() +
   geom_sf(data = evento, show.legend = "point", size = 2) +
   aes(colour = gratuito) +
   theme_void() + 
-  theme(legend.key.size =  unit(1.25, "cm")) + 
+  theme(legend.key.size =  unit(1.15, "cm")) + 
 * theme(panel.grid.major = element_line(colour = 'transparent'))
 ```
 ]]
@@ -903,6 +1019,14 @@ ggplot() +
 ]]
 
 ---
+
+# Basemaps
+
+&lt;img src="./img/basemaps.jpg" width="85%" height="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+
 
 
 
@@ -945,35 +1069,11 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb) +
-* annotation_map_tile(type = "cartolight", zoom = 11)
+* annotation_map_tile(type = "cartolight", zoom = 12)
 ```
 ]]
 .column[.content.center[
 &lt;img src="mapa_flipbook_files/figure-html/output_mapabg_3-1.png" style="display: block; margin: auto;" /&gt;
-
-```
-  
-  |                                                                       
-  |                                                                 |   0%
-  |                                                                       
-  |=======                                                          |  11%
-  |                                                                       
-  |==============                                                   |  22%
-  |                                                                       
-  |======================                                           |  33%
-  |                                                                       
-  |=============================                                    |  44%
-  |                                                                       
-  |====================================                             |  56%
-  |                                                                       
-  |===========================================                      |  67%
-  |                                                                       
-  |===================================================              |  78%
-  |                                                                       
-  |==========================================================       |  89%
-  |                                                                       
-  |=================================================================| 100%
-```
 ]]
 ---
 class: split-40
@@ -984,7 +1084,7 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb) +
-  annotation_map_tile(type = "cartolight", zoom = 11) +
+  annotation_map_tile(type = "cartolight", zoom = 12) +
 * geom_sf(data = evento, aes(colour = gratuito), show.legend = "point")
 ```
 ]]
@@ -1000,9 +1100,9 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb) +
-  annotation_map_tile(type = "cartolight", zoom = 11) +
+  annotation_map_tile(type = "cartolight", zoom = 12) +
   geom_sf(data = evento, aes(colour = gratuito), show.legend = "point") +
-* theme_void()
+* geom_sf(data = cwb_union, fill = "transparent", colour = "gray40")
 ```
 ]]
 .column[.content.center[
@@ -1017,25 +1117,44 @@ count: false
 ```r
 ggplot() +
   geom_sf(data = cwb) +
-  annotation_map_tile(type = "cartolight", zoom = 11) +
+  annotation_map_tile(type = "cartolight", zoom = 12) +
   geom_sf(data = evento, aes(colour = gratuito), show.legend = "point") +
-  theme_void() + 
-* theme(panel.grid.major = element_line(colour = 'transparent'))
+  geom_sf(data = cwb_union, fill = "transparent", colour = "gray40") +
+* theme_void()
 ```
 ]]
 .column[.content.center[
 &lt;img src="mapa_flipbook_files/figure-html/output_mapabg_6-1.png" style="display: block; margin: auto;" /&gt;
 ]]
 ---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "cartolight", zoom = 12) +
+  geom_sf(data = evento, aes(colour = gratuito), show.legend = "point") +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "gray40") +
+  theme_void() + 
+* theme(panel.grid.major = element_line(colour = 'transparent'))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_mapabg_7-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
 
 
 # Opções de Mapas 
 
-+ Opções do pacote, mude o argumento `type`
++ Opções do pacote, mude o argumento `type` da função `annotation_map_tile`
 
 
 ```r
-rosm::osm.types()
+rosm::osm.types() # Alguns precisam de api
 ```
 
 ```
@@ -1056,10 +1175,415 @@ rosm::osm.types()
 rosm::register_tile_source(mapa_wiki = "https://maps.wikimedia.org/osm-intl/${z}/${x}/${y}.png")
 ```
 
-+ Outras Opções
++ Sites que disponibilizam basemaps
 
-&lt;a href=https://www.thunderforest.com/&gt; thunder forest&lt;/a&gt; 
+&lt;a href= http://leaflet-extras.github.io/leaflet-providers/preview/index.html/&gt; leaflet &lt;/a&gt;
+&lt;a href=https://www.thunderforest.com/&gt; thunder forest&lt;/a&gt; &lt;br&gt;
 &lt;a href=https://www.xyht.com/spatial-itgis/using-openstreetmap-basemaps-qgis-3-0/&gt; WikiMaps&lt;/a&gt;
+
+---
+# Leitura Objeto Espacial
+
+&lt;br&gt;
+&lt;div class="img_center"&gt;
+&lt;img src = "https://user-images.githubusercontent.com/520851/34887433-ce1d130e-f7c6-11e7-83fc-d60ad4fae6bd.gif" style = "width: 270px;" alt = "gif" /&gt;
+&lt;/div&gt;
+
+---
+# Formatos Geográficos
+
+&lt;br&gt;
+&lt;img src = "./img/shapefile.png" style = "width: 259px;" alt = "shapefile" /&gt;
+&lt;img src = "./img/geojson.png" style = "width: 261px;" alt = "geojson" /&gt;
+&lt;img src = "./img/kml.png" style = "width: 197px;" alt = "kml" /&gt;
+&lt;img src = "./img/tiff.png" style = "width: 261px;" alt = "tiff" /&gt;
+
+---
+## Ênfase
+
+&lt;br&gt;
+&lt;img src = "./img/shapefile.png" style = "width: 259px;" alt = "shapefile" /&gt;
+&lt;img src = "./img/geojson.png" style = "width: 261px;" alt = "geojson" /&gt;
+
+---
+# Shapefile e Geojson
+
+*Shapefile*
++ .shp; .shx; .dbf  (devem estar na mesma pasta)
++ .prj - opcional
+
+
+```r
+require(sf)
+cwb &lt;- read_sf(
+  dsn = "/home/gabriel/suporte/ciencia_de_dados/base_de_dado/ipppuc/bairro_sirgas", # caminho do arquivo
+  layer = "DIVISA_DE_BAIRROS") # nome do arquivo
+```
+
+--
+*Geojson*
++ .geojson
+
+
+```r
+require(geojsonsf)
+cwb &lt;- geojson_sf("https://raw.githubusercontent.com/gustavokira/geo-curitiba/master/json/bairros.geo.json")
+```
+
+---
+# Resultado
+
+
+```r
+cwb
+```
+
+```
+  Simple feature collection with 75 features and 6 fields
+  geometry type:  POLYGON
+  dimension:      XY
+  bbox:           xmin: -49.3888 ymin: -25.64447 xmax: -49.18323 ymax: -25.34628
+  epsg (SRID):    4326
+  proj4string:    +proj=longlat +datum=WGS84 +no_defs
+  First 10 features:
+          nome_regional codigo_regional      area                nome codigo
+  1     REGIONAL PORTÃO               7 4773046.2          ÁGUA VERDE      9
+  2     REGIONAL MATRIZ               1 1958421.9       JARDIM SOCIAL     18
+  3  REGIONAL BOQUEIRÃO               2 9085388.0               XAXIM     57
+  4     REGIONAL CAJURU               3 3859033.4 JARDIM DAS AMÉRICAS     22
+  5     REGIONAL PORTÃO               7 2311397.6              GUAÍRA     26
+  6  REGIONAL BOA VISTA               4 7201072.4         BAIRRO ALTO     36
+  7     REGIONAL MATRIZ               1 1354451.4       SÃO FRANCISCO      2
+  8     REGIONAL MATRIZ               1  875482.7      ALTO DA GLÓRIA      4
+  9  REGIONAL BOA VISTA               4 4159365.1               ATUBA     55
+  10    REGIONAL MATRIZ               1 2026591.0              CABRAL     16
+                           geometry   tipo
+  1  POLYGON ((-49.27067 -25.452... bairro
+  2  POLYGON ((-49.22952 -25.415... bairro
+  3  POLYGON ((-49.2645 -25.4877... bairro
+  4  POLYGON ((-49.22733 -25.471... bairro
+  5  POLYGON ((-49.28196 -25.476... bairro
+  6  POLYGON ((-49.20702 -25.398... bairro
+  7  POLYGON ((-49.27194 -25.427... bairro
+  8  POLYGON ((-49.26296 -25.415... bairro
+  9  POLYGON ((-49.20708 -25.371... bairro
+  10 POLYGON ((-49.24056 -25.409... bairro
+```
+
+---
+# Bases de Dados Espaciais
+
+&lt;br&gt; 
+**Explore as bases de dados espaciais**
+
++ [IPPUC][ippuc]
++ [estados do Brasil][brasil-geojson]
++ [Instituto de Terras, Cartografia e Geologia do Paraná][itcg]
++ [data-gov][data-energy]
++ [EUA][data-gov]
++ [energia][data-energy]
++ [World Resource Institute][world-resource-institute]
+
+---
+# Criando Objeto Espacial
+
+&lt;br&gt; 
+
++ Vamos considerar que você recebeu um conjunto de latitude e longitude (ponto) e deseja transformar em objeto espacial!
++ Dados de Monitoramento de Qualidade da água em Curitiba 
+
+
+```
+  Observations: 6
+  Variables: 4
+  $ id_estacao &lt;chr&gt; "65007010", "65007020", "65007022", "65007030", "6501…
+  $ ph         &lt;dbl&gt; 7.8, 7.8, 7.4, 7.7, 7.4, 7.6
+  $ latitude   &lt;dbl&gt; -25.38, -25.38, -25.39, -25.40, -25.37, -25.43
+  $ longitude  &lt;dbl&gt; -49.19, -49.23, -49.22, -49.21, -49.26, -49.26
+```
+
++ Formato do Dado
+
+
+```r
+qualidade_agua %&gt;% class()
+```
+
+```
+  [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+--
++ *Se você tentar um plot.. vai acontecer isso*
+
+---
+
+
+```r
+plot(qualidade_agua)
+```
+
+&lt;img src="mapa_flipbook_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Transformando em objeto espacial
+
+
+```r
+sf_qualidade_agua &lt;- 
+  sf::st_as_sf(x = qualidade_agua, # base de dados
+              coords = c("longitude", "latitude"),  # Variaveis espaciais
+              agr = "identity", # Atributo identidade
+              crs = 4326)   # Sistema de refereencia geografica
+```
+
++ Formato do Dado
+
+
+```r
+sf_qualidade_agua %&gt;% head(n = 1)
+```
+
+```
+  Simple feature collection with 1 feature and 2 fields
+  Attribute-geometry relationship: 0 constant, 0 aggregate, 2 identity
+  geometry type:  POINT
+  dimension:      XY
+  bbox:           xmin: -49.19 ymin: -25.38 xmax: -49.19 ymax: -25.38
+  epsg (SRID):    4326
+  proj4string:    +proj=longlat +datum=WGS84 +no_defs
+  # A tibble: 1 x 3
+    id_estacao    ph        geometry
+    &lt;chr&gt;      &lt;dbl&gt;     &lt;POINT [°]&gt;
+  1 65007010     7.8 (-49.19 -25.38)
+```
+
++  &lt;a href = "https://bookdown.org/robinlovelace/geocompr/spatial-class.html#crs-intro"&gt; detalhes crs &lt;/a&gt;
+
+
+
+
+
+
+---
+
+
+
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+*ggplot()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_1-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+* geom_sf(data = cwb)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_2-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+* annotation_map_tile(type = "hydra_base", zoom = 12)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_3-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+* geom_sf(data = cwb_union, fill = "transparent", colour = "white")
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_4-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+* geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_5-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+  geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5) +
+* geom_sf(data = sf_qualidade_agua,   aes(colour = ph) , size = 2)
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_6-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+  geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5) +
+  geom_sf(data = sf_qualidade_agua,   aes(colour = ph) , size = 2) +
+* scale_colour_gradientn(colours = brewer.pal(5, "Blues"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_7-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+  geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5) +
+  geom_sf(data = sf_qualidade_agua,   aes(colour = ph) , size = 2) +
+  scale_colour_gradientn(colours = brewer.pal(5, "Blues")) +
+* theme_void()
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_8-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+  geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5) +
+  geom_sf(data = sf_qualidade_agua,   aes(colour = ph) , size = 2) +
+  scale_colour_gradientn(colours = brewer.pal(5, "Blues")) +
+  theme_void() + 
+* theme(panel.grid.major = element_line(colour = 'transparent'))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_9-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+  geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5) +
+  geom_sf(data = sf_qualidade_agua,   aes(colour = ph) , size = 2) +
+  scale_colour_gradientn(colours = brewer.pal(5, "Blues")) +
+  theme_void() + 
+  theme(panel.grid.major = element_line(colour = 'transparent')) + 
+* theme(legend.key.size =  unit(0.75, "cm"))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_10-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+class: split-40
+count: false
+
+.column[.content[
+
+```r
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+  geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5) +
+  geom_sf(data = sf_qualidade_agua,   aes(colour = ph) , size = 2) +
+  scale_colour_gradientn(colours = brewer.pal(5, "Blues")) +
+  theme_void() + 
+  theme(panel.grid.major = element_line(colour = 'transparent')) + 
+  theme(legend.key.size =  unit(0.75, "cm")) + 
+* theme(legend.text =  element_text(size = 8))
+```
+]]
+.column[.content.center[
+&lt;img src="mapa_flipbook_files/figure-html/output_qualidade_agua_11-1.png" style="display: block; margin: auto;" /&gt;
+]]
+---
+
+
+# Referência
+
+&lt;a href="https://geocompr.robinlovelace.net/"&gt;
+&lt;img bordxer="0" alt="tops" src="./img/geocomputing.jpeg" width="100" height="100"&gt;
+&lt;/a&gt;
+
+---
+# Agradecimentos
+
+&lt;br&gt;
+
++ Daniel Ruffasto, scrapping dos eventos 
+
++ Equipe MAPI
+
 
 
 
@@ -1069,6 +1593,21 @@ rosm::register_tile_source(mapa_wiki = "https://maps.wikimedia.org/osm-intl/${z}
   font-size: 45% # tamanho da fonte nos códigos
   }
 &lt;/style&gt;
+
+
+
+
+
+[ippuc]: http://ippuc.org.br/geodownloads/geo.htm
+[brasil-geojson]: https://github.com/tbrugz/geodata-br
+[data-gov]: https://catalog.data.gov/organization/01ca8df8-6248-41e6-baa2-8b682e4b5a08?res_format=SHP&amp;_res_format_limit=0
+[data-energy]: https://energydata.info/dataset?res_format=GeoJSON&amp;page=1
+[data-gov]: http://dados.gov.br/dataset?res_format=ZIP+SHP&amp;_res_format_limit=0
+[itcg]: http://www.itcg.pr.gov.br/modules/faq/category.php?categoryid=9#
+[world-resource-institute]: http://datasets.wri.org/dataset?q=Forests&amp;res_format=GeoJSON
+[geocomputing]: 
+
+&lt;!-- https://geocompr.robinlovelace.net/images/cover.png --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

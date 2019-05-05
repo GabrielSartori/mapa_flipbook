@@ -8,7 +8,13 @@ editor_options:
 ---
 
 ---
-## Mercado Imobiliário (Diferentes Quartos) 
+## Mercado Imobiliário 
+
++ Curitiba
++ Valor Locação 
++ Apartamento
++ Quartos: 1 e 2
+
 
 ```{r, echo = FALSE}
 moradia_quarto2_1 <-
@@ -25,6 +31,7 @@ moradia_quarto2_1 <-
 
 ```{r, echo = FALSE}
 moradia_quarto2_1  %>% 
+  st_as_sf() %>% 
   select(bairro, quarto, apartamento)
 ```
 
@@ -33,7 +40,7 @@ moradia_quarto2_1  %>%
 ```{r facetmapa, eval = F, echo = F, comment = "", warning = FALSE}
 ggplot() +
   geom_sf(data = cwb, fill = "gray80", colour = "white") +
-  geom_sf(data = moradia_quarto2_1, aes(fill = casa))  +
+  geom_sf(data = moradia_quarto2_1, aes(fill = apartamento))  +
   facet_wrap(~quarto, ncol = 2) +
   scale_fill_gradientn(colours = brewer.pal(5, "Oranges"), na.value = "white", labels = number_br) +
   labs(fill = "Valor")  +

@@ -1,0 +1,31 @@
+---
+title: "first_"
+author: "Gabriel Sartori"
+date: ""
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+rosm::register_tile_source(hydra_base  = "https://a.tile.openstreetmap.se/hydda/base/${z}/${x}/${y}.png")
+```
+
+---
+
+```{r, qualidade_agua, eval = F, echo = F, comment = "", warning = FALSE}
+ggplot() +
+  geom_sf(data = cwb) +
+  annotation_map_tile(type = "hydra_base", zoom = 12) +
+  geom_sf(data = cwb_union, fill = "transparent", colour = "white") +
+  geom_sf(data = sf_qualidade_agua,   colour = "black", size = 2.5) +
+  geom_sf(data = sf_qualidade_agua,   aes(colour = ph) , size = 2) +
+  scale_colour_gradientn(colours = brewer.pal(5, "Blues")) +
+  theme_void() + 
+  theme(panel.grid.major = element_line(colour = 'transparent')) + 
+  theme(legend.key.size =  unit(0.75, "cm")) + 
+  theme(legend.text =  element_text(size = 8)) 
+```
+
+`r paste(knitr::knit(text = partial_knit_chunks("qualidade_agua")), collapse = "\n")`
+---
