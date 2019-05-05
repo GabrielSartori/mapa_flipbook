@@ -531,7 +531,14 @@ sf_qualidade_agua %>% head(n = 1)
 
 + Equipe MAPI
 
+---
+# Contato
 
+<br>
+
++ gsartorik@gmail.com
+
++ [gsartorik.com][site-pessoal]
 
 
 ```{css, eval = TRUE, echo = F}
@@ -564,6 +571,5 @@ sf_qualidade_agua %>% head(n = 1)
 [data-gov]: http://dados.gov.br/dataset?res_format=ZIP+SHP&_res_format_limit=0
 [itcg]: http://www.itcg.pr.gov.br/modules/faq/category.php?categoryid=9#
 [world-resource-institute]: http://datasets.wri.org/dataset?q=Forests&res_format=GeoJSON
-[geocomputing]: 
-
+[site-pessoal]: https://gsartorik.com/pt/
 <!-- https://geocompr.robinlovelace.net/images/cover.png -->
