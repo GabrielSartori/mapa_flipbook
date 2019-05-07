@@ -1177,7 +1177,7 @@ rosm::register_tile_source(mapa_wiki = "https://maps.wikimedia.org/osm-intl/${z}
 
 + Sites que disponibilizam basemaps
 
-&lt;a href= http://leaflet-extras.github.io/leaflet-providers/preview/index.html/&gt; leaflet &lt;/a&gt;
+&lt;a href= http://leaflet-extras.github.io/leaflet-providers/preview/index.html/&gt; leaflet &lt;/a&gt; &lt;br&gt;
 &lt;a href=https://www.thunderforest.com/&gt; thunder forest&lt;/a&gt; &lt;br&gt;
 &lt;a href=https://www.xyht.com/spatial-itgis/using-openstreetmap-basemaps-qgis-3-0/&gt; WikiMaps&lt;/a&gt;
 
@@ -1332,9 +1332,9 @@ plot(qualidade_agua)
 ```r
 sf_qualidade_agua &lt;- 
   sf::st_as_sf(x = qualidade_agua, # base de dados
-              coords = c("longitude", "latitude"),  # Variaveis espaciais
+              coords = c("longitude", "latitude"),  # Variáveis espaciais
               agr = "identity", # Atributo identidade
-              crs = 4326)   # Sistema de refereencia geografica
+              crs = 4326)   # Sistema de referência geografica
 ```
 
 + Formato do Dado
@@ -1580,7 +1580,7 @@ ggplot() +
 
 &lt;br&gt;
 
-+ Daniel Ruffasto, scrapping dos eventos 
++ Daniel Ruffasto, scrapping dos eventos no site Evertbrite
 
 + Equipe MAPI
 
@@ -1592,6 +1592,8 @@ ggplot() +
 + gsartorik@gmail.com
 
 + [gsartorik.com][site-pessoal]
+
++ Todo material está disponível em no [github][github-gabriel]
 
 
 &lt;style type="text/css"&gt;
@@ -1613,6 +1615,7 @@ ggplot() +
 [itcg]: http://www.itcg.pr.gov.br/modules/faq/category.php?categoryid=9#
 [world-resource-institute]: http://datasets.wri.org/dataset?q=Forests&amp;res_format=GeoJSON
 [site-pessoal]: https://gsartorik.com/pt/
+[github-gabriel]: https://github.com/GabrielSartori/mapa_flipbook
 &lt;!-- https://geocompr.robinlovelace.net/images/cover.png --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

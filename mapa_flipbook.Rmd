@@ -370,7 +370,7 @@ rosm::register_tile_source(mapa_wiki = "https://maps.wikimedia.org/osm-intl/${z}
 
 + Sites que disponibilizam basemaps
 
-<a href= http://leaflet-extras.github.io/leaflet-providers/preview/index.html/> leaflet </a>
+<a href= http://leaflet-extras.github.io/leaflet-providers/preview/index.html/> leaflet </a> <br>
 <a href=https://www.thunderforest.com/> thunder forest</a> <br>
 <a href=https://www.xyht.com/spatial-itgis/using-openstreetmap-basemaps-qgis-3-0/> WikiMaps</a>
 
@@ -497,9 +497,9 @@ plot(qualidade_agua)
 ```{r, echo = TRUE}
 sf_qualidade_agua <- 
   sf::st_as_sf(x = qualidade_agua, # base de dados
-              coords = c("longitude", "latitude"),  # Variaveis espaciais
+              coords = c("longitude", "latitude"),  # Variáveis espaciais
               agr = "identity", # Atributo identidade
-              crs = 4326)   # Sistema de refereencia geografica
+              crs = 4326)   # Sistema de referência geografica
 ```
 
 + Formato do Dado
@@ -527,7 +527,7 @@ sf_qualidade_agua %>% head(n = 1)
 
 <br>
 
-+ Daniel Ruffasto, scrapping dos eventos 
++ Daniel Ruffasto, scrapping dos eventos no site Evertbrite
 
 + Equipe MAPI
 
@@ -539,6 +539,8 @@ sf_qualidade_agua %>% head(n = 1)
 + gsartorik@gmail.com
 
 + [gsartorik.com][site-pessoal]
+
++ Todo material está disponível em no [github][github-gabriel]
 
 
 ```{css, eval = TRUE, echo = F}
@@ -572,4 +574,5 @@ sf_qualidade_agua %>% head(n = 1)
 [itcg]: http://www.itcg.pr.gov.br/modules/faq/category.php?categoryid=9#
 [world-resource-institute]: http://datasets.wri.org/dataset?q=Forests&res_format=GeoJSON
 [site-pessoal]: https://gsartorik.com/pt/
+[github-gabriel]: https://github.com/GabrielSartori/mapa_flipbook
 <!-- https://geocompr.robinlovelace.net/images/cover.png -->
